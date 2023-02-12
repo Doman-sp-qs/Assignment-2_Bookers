@@ -1,0 +1,41 @@
+<!--投稿編集ページ-->
+<h1>
+  Editing Book
+</h1>
+
+<% if @book.errors.any? %>
+  
+  <section class="errors-box">
+    <h2><%= @book.errors.count %> errors prohibited this book from being saved:</h2>
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </section>
+  
+<% end %>
+
+<%= form_with model: @book, url: book_path(@book.id), method: :patch do |f| %>
+  
+  <div class="input-field">
+    <p>Title</p>
+    <%= f.text_field :title %>
+  </div>
+  
+  <div class="input-field">
+    <p>Body</p>
+    <%= f.text_area :body %>
+  </div>
+  <div class="btn">
+    <%= f.submit 'Update Book' %>
+  </div>
+
+<% end %>
+
+<a><%= link_to "Show", book_path(@book.id) %></a>
+|
+<a><%= link_to "Back", books_path %></a>
+  
+
+
